@@ -1,8 +1,55 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { useState } from "react";
+import Axios from 'axios'
+
 
 export default function Home() {
+const [name, setName] = useState('');
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
+const [status, setStatus] = useState('')
+
+  const addNanny = () => {
+
+    Axios.post ('http://localhost:3001/createNanny',
+    {
+      name: name,
+      email: email,
+      password: password
+    }
+    ).then(() => {
+      console.log('you have a new nanny')
+    })
+  }
+
+  const addParent = () => {
+
+    Axios.post ('http://localhost:3001/createParent',
+    {
+      name: name,
+      email: email,
+      password: password
+    }
+    ).then(() => {
+      console.log('you have a new nanny')
+    })
+  }
+
+  const ParentorNanny = (e) => {
+    if(status === 'nanny') {
+      console.log(status);
+      addNanny();
+    }
+    if(status === 'parent') {
+      console.log(status);
+      addParent();
+   
+    }
+
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -24,11 +71,16 @@ export default function Home() {
           <div className={styles.card}>
             <div className='registration'>
             <h2>Registration</h2>
-            <label>Username</label>
+            <label>name</label>
+            <input type="text" />
+            <label>email</label>
             <input type="text" />
             <label>Password</label>
             <input type="text" />
-            <button>Register</button>
+            <label className="switch">
+      <button value={'parent'} onClick={(e) => {setStatus(e.target.value)}}>Parent</button> <button value={'nanny'} onClick={(e) => {setStatus(e.target.value)}}>Nanny</button>
+</label>
+            <button onClick={ParentorNanny}>Register</button>
             </div>
           </div>
 
