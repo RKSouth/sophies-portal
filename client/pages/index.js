@@ -6,46 +6,50 @@ import Axios from 'axios'
 
 
 export default function Home() {
-const [name, setName] = useState('');
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
-const [status, setStatus] = useState('')
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [status, setStatus] = useState('')
 
-  const addNanny = () => {
-
-    Axios.post ('http://localhost:3001/createNanny',
-    {
-      name: name,
-      email: email,
-      password: password
-    }
-    ).then(() => {
-      console.log('you have a new nanny')
+  const addNanny = (e) => {
+    // e.preventDefault();
+    // console.log(name,email);
+    Axios.post('http://localhost:3001/createNanny',
+      {
+        name: name,
+        email: email,
+        password: password
+      }
+    ).then((response) => {
+      console.log('you have a new nanny');
+      console.log(response);
     })
   }
 
   const addParent = () => {
 
-    Axios.post ('http://localhost:3001/createParent',
-    {
-      name: name,
-      email: email,
-      password: password
-    }
+    Axios.post('http://localhost:3001/createParent',
+      {
+        name: name,
+        email: email,
+        password: password
+      }
     ).then(() => {
       console.log('you have a new nanny')
     })
   }
 
-  const ParentorNanny = (e) => {
-    if(status === 'nanny') {
+  const Register = (event) => {
+    // event.preventDefault();
+    console.log('registered')
+    if (status === 'nanny') {
       console.log(status);
       addNanny();
     }
-    if(status === 'parent') {
+    if (status === 'parent') {
       console.log(status);
       addParent();
-   
+
     }
 
   }
@@ -70,26 +74,54 @@ const [status, setStatus] = useState('')
         <div className={styles.grid}>
           <div className={styles.card}>
             <div className='registration'>
-            <h2>Registration</h2>
-            <label>name</label>
-            <input type="text" />
-            <label>email</label>
-            <input type="text" />
-            <label>Password</label>
-            <input type="text" />
-            <label className="switch">
-      <button value={'parent'} onClick={(e) => {setStatus(e.target.value)}}>Parent</button> <button value={'nanny'} onClick={(e) => {setStatus(e.target.value)}}>Nanny</button>
-</label>
-            <button onClick={ParentorNanny}>Register</button>
+              <h2>Registration</h2>
+
+              <label>name</label>
+
+              <input
+                type="text"
+                onChange={(e) => {
+                  setName(e.target.value);
+                }} />
+              <label>email</label>
+
+              <input
+                type="email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }} />
+              <label>Password</label>
+
+              <input
+                type="text"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }} />
+
+              <label className="switch">
+
+                <button
+                  value={'parent'}
+                  onClick={(e) => { setStatus(e.target.value) }}>
+                  Parent
+                </button>
+
+                <button
+                  value={'nanny'}
+                  onClick={(e) => { setStatus(e.target.value) }}>
+                  Nanny
+                </button>
+              </label>
+              <button onClick={addNanny}>Register</button>
             </div>
           </div>
 
           <div className={styles.card}>
             <div className='login'>
-            <h2>Login</h2>
-            <input type="text" placeholder='Username..'/>
-            <input type="text" placeholder='Password..' />
-            <button>Login</button>
+              <h2>Login</h2>
+              <input type="text" placeholder='Username..' />
+              <input type="text" placeholder='Password..' />
+              <button>Login</button>
             </div>
           </div>
 
