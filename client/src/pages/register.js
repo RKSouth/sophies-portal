@@ -4,13 +4,17 @@ import Axios from 'axios'
 import { Link } from "react-router-dom";
 
 export default function Register() {
-    const [nannyName, setNannyName] = useState('');
-    const [nannyEmail, setNannyEmail] = useState('');
-    const [nannyPassword, setNannyPassword] = useState('');
+    // const [nannyName, setNannyName] = useState('');
+    // const [nannyEmail, setNannyEmail] = useState('');
+    // const [nannyPassword, setNannyPassword] = useState('');
 
-    const [parentName, setParentName] = useState('');
-    const [parentEmail, setParentEmail] = useState('');
-    const [parentPassword, setParentPassword] = useState('');
+    // const [parentName, setParentName] = useState('');
+    // const [parentEmail, setParentEmail] = useState('');
+    // const [parentPassword, setParentPassword] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
 
     const [isParent, setIsParent] = useState(false);
     const [isNanny, setIsNanny] = useState(false);
@@ -37,12 +41,12 @@ export default function Register() {
 
     const addNanny = (e) => {
         // e.preventDefault();
-        // console.log(name,email);
-        Axios.post('http://localhost:3001/createNanny',
+        console.log(name,email);
+        Axios.post('http://localhost:3001/create',
             {
-                name: nannyName,
-                email: nannyEmail,
-                password: nannyPassword
+                name: name,
+                email: email,
+                password: password
             }
         ).then((response) => {
             console.log('you have a new nanny');
@@ -54,11 +58,11 @@ export default function Register() {
     const addParent = (e) => {
         // e.preventDefault();
         // console.log(name,email);
-        Axios.post('http://localhost:3001/createParent',
+        Axios.post('http://localhost:3001/parent',
             {
-                name: parentName,
-                email: parentEmail,
-                password: parentPassword
+                name: name,
+                email: email,
+                password: password
             }
         ).then((response) => {
             console.log('you have a new nanny');
@@ -97,21 +101,21 @@ export default function Register() {
                       <input
                           type="text"
                           onChange={(e) => {
-                              setNannyName(e.target.value);
+                              setName(e.target.value);
                           }} />
                       <label>email</label>
       
                       <input
                           type="email"
                           onChange={(e) => {
-                              setNannyEmail(e.target.value);
+                              setEmail(e.target.value);
                           }} />
                       <label>Password</label>
       
                       <input
                           type="text"
                           onChange={(e) => {
-                              setNannyPassword(e.target.value);
+                              setPassword(e.target.value);
                           }} />
                       <button onClick={addNanny}>Register</button>
                   </div>
@@ -128,21 +132,21 @@ export default function Register() {
         <input
             type="text"
             onChange={(e) => {
-                setParentName(e.target.value);
+                setName(e.target.value);
             }} />
         <label>email</label>
 
         <input
             type="email"
             onChange={(e) => {
-                setParentEmail(e.target.value);
+                setEmail(e.target.value);
             }} />
         <label>Password</label>
 
         <input
             type="text"
             onChange={(e) => {
-                setParentPassword(e.target.value);
+                setPassword(e.target.value);
             }} />
 
 
