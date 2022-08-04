@@ -2,22 +2,21 @@
 import React, { useState } from "react";
 import Axios from 'axios'
 import { Link } from "react-router-dom";
-
+import {Routes, Route, useNavigate} from 'react-router-dom';
 export default function Register() {
-    // const [nannyName, setNannyName] = useState('');
-    // const [nannyEmail, setNannyEmail] = useState('');
-    // const [nannyPassword, setNannyPassword] = useState('');
-
-    // const [parentName, setParentName] = useState('');
-    // const [parentEmail, setParentEmail] = useState('');
-    // const [parentPassword, setParentPassword] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-
     const [isParent, setIsParent] = useState(false);
     const [isNanny, setIsNanny] = useState(false);
+
+    const navigate = useNavigate();
+
+    const navigateHome = () => {
+        // 👇️ navigate to /
+        navigate('/');
+      };
 
     const NannyReg = () => {
 
@@ -51,6 +50,7 @@ export default function Register() {
         ).then((response) => {
             console.log('you have a new nanny');
             console.log(response);
+            navigateHome();
         })
     }
 
