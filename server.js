@@ -1,5 +1,3 @@
-
-
 const express = require("express");
 const app = express();
 const mysql = require("mysql");
@@ -17,14 +15,13 @@ const db = mysql.createConnection({
 
 app.post("/create", (req, res) => {
   const name = req.body.name;
-  const age = req.body.age;
-  const country = req.body.country;
-  const position = req.body.position;
-  const wage = req.body.wage;
+  const email = req.body.email;
+  const password = req.body.password;
+
 
   db.query(
-    "INSERT INTO employees (name, age, country, position, wage) VALUES (?,?,?,?,?)",
-    [name, age, country, position, wage],
+    "INSERT INTO nannys (name, email, password) VALUES (?,?,?)",
+    [name, email, password],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -35,8 +32,8 @@ app.post("/create", (req, res) => {
   );
 });
 
-app.get("/employees", (req, res) => {
-  db.query("SELECT * FROM employees", (err, result) => {
+app.get("/nannys", (req, res) => {
+  db.query("SELECT * FROM nannys", (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -45,32 +42,6 @@ app.get("/employees", (req, res) => {
   });
 });
 
-app.put("/update", (req, res) => {
-  const id = req.body.id;
-  const wage = req.body.wage;
-  db.query(
-    "UPDATE employees SET wage = ? WHERE id = ?",
-    [wage, id],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send(result);
-      }
-    }
-  );
-});
-
-app.delete("/delete/:id", (req, res) => {
-  const id = req.params.id;
-  db.query("DELETE FROM employees WHERE id = ?", id, (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(result);
-    }
-  });
-});
 
 app.listen(3001, () => {
   console.log("Yey, your server is running on port 3001");
