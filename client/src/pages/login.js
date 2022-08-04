@@ -42,9 +42,9 @@ export default function Register() {
     }
 
 
-      const login = () => {
+      const nannylogin = () => {
         console.log('loggin in')
-        Axios.post("http://localhost:3001/login", {
+        Axios.post("http://localhost:3001/nannylogin", {
           email: email,
           password: password,
         }).then((response) => {
@@ -56,6 +56,20 @@ export default function Register() {
         });
       };
     
+      const parentlogin = () => {
+        console.log('loggin in')
+        Axios.post("http://localhost:3001/parentlogin", {
+          email: email,
+          password: password,
+        }).then((response) => {
+          if (response.data.message) {
+            setLoginStatus(response.data.message);
+          } else {
+            setLoginStatus(response.data[0].email);
+          }
+        });
+      };
+
       useEffect(() => {
         Axios.get("http://localhost:3001/login").then((response) => {
           if (response.data.loggedIn === true) {
@@ -102,7 +116,7 @@ export default function Register() {
             setPassword(e.target.value);
           }}
         />
-        <button onClick={login}> Login </button>
+        <button onClick={nannylogin}> Login </button>
                   </div>
               </div>
                         )}
@@ -125,7 +139,7 @@ export default function Register() {
             setPassword(e.target.value);
           }}
         />
-        <button onClick={login}> Login </button>
+        <button onClick={parentlogin}> Login </button>
   
 
        
