@@ -1,15 +1,18 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from 'axios'
 import { Link } from "react-router-dom";
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 export default function Register() {
-    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const [isParent, setIsParent] = useState(false);
     const [isNanny, setIsNanny] = useState(false);
+
+    const [loginStatus, setLoginStatus] = useState("");
+
+    Axios.defaults.withCredentials = true;
 
     const navigate = useNavigate();
 
@@ -18,7 +21,7 @@ export default function Register() {
         navigate('/');
       };
 
-    const NannyReg = () => {
+      const NannyReg = () => {
 
         if (isNanny === false) {
             setIsNanny(true);
@@ -38,45 +41,34 @@ export default function Register() {
         }
     }
 
-    const addNanny = (e) => {
-        // e.preventDefault();
-        console.log(name,email);
-        Axios.post('http://localhost:3001/create',
-            {
-                name: name,
-                email: email,
-                password: password
-            }
-        ).then((response) => {
-            console.log('you have a new nanny');
-            console.log(response);
-            navigateHome();
-        })
-    }
 
+      const login = () => {
+        console.log('loggin in')
+        Axios.post("http://localhost:3001/login", {
+          email: email,
+          password: password,
+        }).then((response) => {
+          if (response.data.message) {
+            setLoginStatus(response.data.message);
+          } else {
+            setLoginStatus(response.data[0].email);
+          }
+        });
+      };
     
-    const addParent = (e) => {
-        // e.preventDefault();
-        // console.log(name,email);
-        Axios.post('http://localhost:3001/parent',
-            {
-                name: name,
-                email: email,
-                password: password
-            }
-        ).then((response) => {
-            console.log('you have a new nanny');
-            console.log(response);
-        })
-    }
-
-
-
+      useEffect(() => {
+        Axios.get("http://localhost:3001/login").then((response) => {
+          if (response.data.loggedIn === true) {
+            setLoginStatus(response.data.user[0].email);
+          }
+        });
+      }, []);
 
     return (
 <div className='App-header'>
+<h1>{loginStatus}</h1>
         <div className='grid'>
-             <h2>Register as a...</h2>
+             <h2>Login as a...</h2>
             <label className="switch">
 
                 <button
@@ -95,29 +87,22 @@ export default function Register() {
                 {isNanny && (
                   <div className='card'>
                   <div className='registration'>
-                      <h2>Nanny Registration</h2>
-      
-                      <label>name</label>
+                      <h2>Nanny Login</h2>
                       <input
-                          type="text"
-                          onChange={(e) => {
-                              setName(e.target.value);
-                          }} />
-                      <label>email</label>
-      
-                      <input
-                          type="email"
-                          onChange={(e) => {
-                              setEmail(e.target.value);
-                          }} />
-                      <label>Password</label>
-      
-                      <input
-                          type="text"
-                          onChange={(e) => {
-                              setPassword(e.target.value);
-                          }} />
-                      <button onClick={addNanny}>Register</button>
+          type="text"
+          placeholder="Email..."
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+        <input
+          type="password"
+          placeholder="Password..."
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
+        <button onClick={login}> Login </button>
                   </div>
               </div>
                         )}
@@ -125,32 +110,25 @@ export default function Register() {
            {isParent && (
     <div className='card'>
     <div className='registration'>
-      
-    <h2>Parent Registration</h2>
-
-        <label>name</label>
+    <h2>Parent Login</h2>
+    <input
+          type="text"
+          placeholder="Email..."
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
         <input
-            type="text"
-            onChange={(e) => {
-                setName(e.target.value);
-            }} />
-        <label>email</label>
+          type="text"
+          placeholder="Password..."
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
+        <button onClick={login}> Login </button>
+  
 
-        <input
-            type="email"
-            onChange={(e) => {
-                setEmail(e.target.value);
-            }} />
-        <label>Password</label>
-
-        <input
-            type="text"
-            onChange={(e) => {
-                setPassword(e.target.value);
-            }} />
-
-
-        <button onClick={addParent}>Register</button>
+       
     </div>
 </div>
            )}

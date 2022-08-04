@@ -92,16 +92,55 @@ app.post("/parent", (req, res) => {
   
 
 
-app.get("/nannys", (req, res) => {
-  db.query("SELECT * FROM nannys", (err, result) => {
-    if (err) {
-      console.log(err);
+// app.get("/nannys", (req, res) => {
+//   db.query("SELECT * FROM nannys", (err, result) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.send(result);
+//     }
+//   });
+// });
+
+
+
+app.get("/login", (req, res) => {
+    if (req.session.nanny) {
+      res.send({ loggedIn: true, nanny: req.session.nanny });
     } else {
-      res.send(result);
+      res.send({ loggedIn: false });
     }
   });
-});
-
+  
+  app.post("/login", (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+  
+    db.query(
+      "SELECT * FROM nannies WHERE email = ?;",
+      email,
+      (err, result) => {
+        if (err) {
+          res.send({ err: err });
+        }
+  
+        if (result.length > 0) {
+          bcrypt.compare(password, result[0].password, (error, response) => {
+            if (response) {
+              req.session.user = result;
+              console.log(req.session.user);
+              res.send(result);
+            } else {
+              res.send({ message: "Wrong username/password combination!" });
+            }
+          });
+        } else {
+          res.send({ message: "User doesn't exist" });
+        }
+      }
+    );
+    
+  })
 
 app.listen(3001, () => {
   console.log("Yey, your server is running on port 3001");
