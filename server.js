@@ -1,72 +1,77 @@
-const express = require('express'); 
-const mysql = require('mysql');
-const cors = require('cors');
 
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const session = require("express-session");
 
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
+const express = require("express");
 const app = express();
+const mysql = require("mysql");
+const cors = require("cors");
 
+app.use(cors());
 app.use(express.json());
 
-app.use(
-    cors({
-      origin: ["http://localhost:3000"],
-      methods: ["GET", "POST"],
-      credentials: true,
-    })
-  );
-
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(
-    session({
-      key: "nannyId",
-      secret: "subscribe",
-      resave: false,
-      saveUninitialized: false,
-      cookie: {
-        expires: 60 * 60 * 24,
-      },
-    })
-  );
-  
 const db = mysql.createConnection({
-    nanny:'root',
-    host:'localhost',
-    password:'root',
-    port: 3001,
-    database: 'sophiesportal'
-})
+  user: "root",
+  host: "localhost",
+  password: "root",
+  database: "sophiesportal",
+});
 
-app.post("/createNanny", (req, res) => {
-    const name = req.body.name;
-    const email = req.body.email;
-    const password = req.body.password;
+app.post("/create", (req, res) => {
+  const name = req.body.name;
+  const age = req.body.age;
+  const country = req.body.country;
+  const position = req.body.position;
+  const wage = req.body.wage;
 
-    // bcrypt.hash(password, saltRounds, (err, hash) => {
-    //     if (err) {
-    //       console.log(err);
-    //     } else {
-    //         console.log(res)
-    //     }
-    
-        db.query(
-          "INSERT INTO nannys (name, email, password) VALUES (?,?,?)",
-          [name, email, password],
-          (err, res) => {
-            console.log(err);
-            console.log(result)
-          }
-        );
-      });
-    // });
+  db.query(
+    "INSERT INTO employees (name, age, country, position, wage) VALUES (?,?,?,?,?)",
+    [name, age, country, position, wage],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("Values Inserted");
+      }
+    }
+  );
+});
 
+app.get("/employees", (req, res) => {
+  db.query("SELECT * FROM employees", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.put("/update", (req, res) => {
+  const id = req.body.id;
+  const wage = req.body.wage;
+  db.query(
+    "UPDATE employees SET wage = ? WHERE id = ?",
+    [wage, id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.delete("/delete/:id", (req, res) => {
+  const id = req.params.id;
+  db.query("DELETE FROM employees WHERE id = ?", id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
 
 app.listen(3001, () => {
-    console.log('running on port 3001');
-})
+  console.log("Yey, your server is running on port 3001");
+});
