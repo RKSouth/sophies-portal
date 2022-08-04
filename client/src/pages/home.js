@@ -19,7 +19,10 @@ function Home() {
           A place for all things Sophie
         </p>
         <Link className="link" to="/register">Register<span className="sr-only"></span></Link>
-    
+        <br/>
+        <Link className="link" to="/login">Login<span className="sr-only"></span></Link>
+        <br/>
+        <Link className="link" to="/about">About<span className="sr-only"></span></Link>
     
     </main>
     </div>

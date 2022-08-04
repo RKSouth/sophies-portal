@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import Home from './pages/home';
 import Register from './pages/register';
+import Login from './pages/login';
+import About from './pages/about';
 import './index.css'
 //import createRoot from 'react-dom'
 
@@ -26,8 +28,8 @@ ReactDOM.render(
       <Route index element={<Home />} />
       </Route>
       <Route path="register" element={<Register/>}/>
-    
-   
+      <Route path="login" element={<Login/>}/> 
+      <Route path="about" element={<About/>}/>
   </Routes>
 
 </BrowserRouter>,

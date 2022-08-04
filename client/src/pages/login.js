@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Axios from 'axios'
 import { Link } from "react-router-dom";
-import {useNavigate} from 'react-router-dom';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 export default function Register() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -56,7 +56,8 @@ export default function Register() {
 
     
     const addParent = (e) => {
-
+        // e.preventDefault();
+        // console.log(name,email);
         Axios.post('http://localhost:3001/parent',
             {
                 name: name,
@@ -64,9 +65,8 @@ export default function Register() {
                 password: password
             }
         ).then((response) => {
-            console.log('you have a new parent');
+            console.log('you have a new nanny');
             console.log(response);
-            navigateHome();
         })
     }
 
@@ -103,7 +103,6 @@ export default function Register() {
                           onChange={(e) => {
                               setName(e.target.value);
                           }} />
-                          <hr/>
                       <label>email</label>
       
                       <input
@@ -111,8 +110,7 @@ export default function Register() {
                           onChange={(e) => {
                               setEmail(e.target.value);
                           }} />
-                          <hr/>
-                      <label>password</label>
+                      <label>Password</label>
       
                       <input
                           type="text"
@@ -136,7 +134,6 @@ export default function Register() {
             onChange={(e) => {
                 setName(e.target.value);
             }} />
-            <hr/>
         <label>email</label>
 
         <input
@@ -144,8 +141,7 @@ export default function Register() {
             onChange={(e) => {
                 setEmail(e.target.value);
             }} />
-            <hr/>
-        <label>password</label>
+        <label>Password</label>
 
         <input
             type="text"

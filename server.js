@@ -1,11 +1,38 @@
 const express = require("express");
-const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
 
-app.use(cors());
-app.use(express.json());
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+
+const app = express();
+
+app.use(express.json());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    key: "userId",
+    secret: "subscribe",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 60 * 60 * 24,
+    },
+  })
+);
 const db = mysql.createConnection({
   user: "root",
   host: "localhost",
@@ -17,43 +44,53 @@ app.post("/create", (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
-
-
-  db.query(
-    "INSERT INTO nannys (name, email, password) VALUES (?,?,?)",
-    [name, email, password],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send("Values Inserted");
-      }
+  
+  bcrypt.hash(password, saltRounds, (err, hash) => {
+    if (err) {
+      console.log(err);
     }
-  );
-});
 
-app.post("/parent", (req, res) => {
-    const name = req.body.name;
-    const password = req.body.password;
-    const email = req.body.email;
-    const phone = req.body.phone;
-    const children = req.body.children;
-    const nanny = req.body.nanny;
-    const emergencyContact = req.body.emergencyContact
-  
-  
     db.query(
-      "INSERT INTO parents (name, email, password) VALUES (?,?,?,?,?,?,?)",
-      [name, password, email],
+      "INSERT INTO nannies (name, email, password) VALUES (?,?,?)",
+      [name, email, hash],
       (err, result) => {
         if (err) {
-          console.log(err);
-        } else {
-          res.send("Values Inserted");
-        }
+                     console.log(err);
+                   } else {
+                     res.send("Values Inserted");
+                 }
       }
     );
   });
+});
+
+
+app.post("/parent", (req, res) => {
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+    
+    bcrypt.hash(password, saltRounds, (err, hash) => {
+      if (err) {
+        console.log(err);
+      }
+  
+      db.query(
+        "INSERT INTO parents (name, email, password) VALUES (?,?,?)",
+        [name, email, hash],
+        (err, result) => {
+          if (err) {
+                       console.log(err);
+                     } else {
+                       res.send("Values Inserted");
+                   }
+        }
+      );
+    });
+  });
+  
+  
+
 
 app.get("/nannys", (req, res) => {
   db.query("SELECT * FROM nannys", (err, result) => {
