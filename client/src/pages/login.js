@@ -43,7 +43,7 @@ export default function Register(props) {
     }
 
 
-      const nannylogin = () => {
+      const nannyLogin = () => {
         console.log('loggin in')
         Axios.post("http://localhost:3001/nannylogin", {
           email: email,
@@ -61,7 +61,7 @@ export default function Register(props) {
       };
  
 
-      const parentlogin = () => {
+      const parentLogin = () => {
         console.log('loggin in')
         Axios.post("http://localhost:3001/parentlogin", {
           email: email,
@@ -126,7 +126,7 @@ export default function Register(props) {
             setPassword(e.target.value);
           }}
         />
-        <button onClick={nannylogin}> Login </button>
+        <button onClick={nannyLogin}> Login </button>
                   </div>
               </div>
                         )}
@@ -149,7 +149,7 @@ export default function Register(props) {
             setPassword(e.target.value);
           }}
         />
-        <button onClick={parentlogin}> Login </button>
+        <button onClick={parentLogin}> Login </button>
   
 
        
