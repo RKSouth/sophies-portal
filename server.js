@@ -13,7 +13,7 @@ const db = mysql.createConnection({
   database: "sophiesportal",
 });
 
-app.post("/create", (req, res) => {
+app.post("/createNanny", (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
@@ -31,6 +31,29 @@ app.post("/create", (req, res) => {
     }
   );
 });
+
+app.post("/createParent", (req, res) => {
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+    const phone = req.body.phone;
+    const children = req.body.children;
+    const nanny = req.body.nanny;
+    const emergencyContact = req.body.emergencyContact
+  
+  
+    db.query(
+      "INSERT INTO parents (name, email, password, phone, children, nanny, emergencyContact) VALUES (?,?,?,?,?,?,?)",
+      [name, email, password, phone, children, nanny, emergencyContact],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send("Values Inserted");
+        }
+      }
+    );
+  });
 
 app.get("/nannys", (req, res) => {
   db.query("SELECT * FROM nannys", (err, result) => {

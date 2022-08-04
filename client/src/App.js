@@ -1,12 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
-import Register from './components/register';
 
+import './App.css';
+import Home from './pages/home'
+import React from 'react';
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <Register />
+      <Home />
       </header>
     </div>
   );

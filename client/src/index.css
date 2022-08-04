@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.link {
+  color:aliceblue
+}
+
+button {
+  background-color:darkcyan;
+  border-radius: 12px;
+  box-shadow:transparent;
+margin: 8%;
+  font-weight: 600;
+  font-size: 22px;
+  border-color: transparent;
+}
