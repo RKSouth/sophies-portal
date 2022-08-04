@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import Axios from 'axios'
 import { Link } from "react-router-dom";
 import {useNavigate} from 'react-router-dom';
-export default function Register() {
+
+export default function Register(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -18,7 +19,7 @@ export default function Register() {
 
     const navigateHome = () => {
         // 👇️ navigate to /
-        navigate('/');
+        navigate('/',{state:{loginStatus}});
       };
 
       const NannyReg = () => {
@@ -48,25 +49,34 @@ export default function Register() {
           email: email,
           password: password,
         }).then((response) => {
+          
+          
           if (response.data.message) {
             setLoginStatus(response.data.message);
           } else {
             setLoginStatus(response.data[0].email);
           }
+        navigateHome();
         });
       };
-    
+ 
+
       const parentlogin = () => {
         console.log('loggin in')
         Axios.post("http://localhost:3001/parentlogin", {
           email: email,
           password: password,
         }).then((response) => {
+
+            
           if (response.data.message) {
             setLoginStatus(response.data.message);
           } else {
             setLoginStatus(response.data[0].email);
+            window.localStorage.setItem('email', JSON.stringify(response.data[0].email));
+            w
           }
+          navigateHome();
         });
       };
 

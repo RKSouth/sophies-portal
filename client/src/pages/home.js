@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState}from 'react';
 import { Link } from "react-router-dom";
+import {useLocation} from 'react-router-dom';
+
 
 function Home() {
+    const location = useLocation();
+    console.log(window.localStorage.getItem('state'));
+    
+
   return (
     <div className="Home">
         <div className='container'>
@@ -14,7 +20,7 @@ function Home() {
         <h1 className='title'>
           Welcome to Sophie's Portal
         </h1>
-
+       
         <p className='description'>
           A place for all things Sophie
         </p>
