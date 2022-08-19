@@ -1,40 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import Home from './pages/home';
-import Register from './pages/register';
-import Login from './pages/login';
-import About from './pages/about';
+import { StrictMode } from "react";
+import React  from 'react';
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./utils/useAuth";
 import './index.css'
+import App from './App';
+
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
+
+
+
 //import createRoot from 'react-dom'
 
-import {
-  BrowserRouter,
-  Routes,
-  Route
-} from "react-router-dom";
 
-
-
-ReactDOM.render(
-  
-
-
-  <BrowserRouter>
-
-
-  <Routes>
-    <Route path="/" element={<App />}>
-      <Route index element={<Home />} />
-      </Route>
-      <Route path="register" element={<Register/>}/>
-      <Route path="login" element={<Login/>}/> 
-      <Route path="about" element={<About/>}/>
-  </Routes>
-
-</BrowserRouter>,
-
-  document.getElementById('root')
+root.render(
+  <StrictMode>
+    <BrowserRouter>
+      <AuthProvider>
+       
+          <App />
+    
+      </AuthProvider>
+    </BrowserRouter>
+  </StrictMode>
 );
 
 

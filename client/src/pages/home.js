@@ -1,12 +1,11 @@
-import React, {useEffect, useState}from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
-import {useLocation} from 'react-router-dom';
-
-
+import {useLocation, useNavigate} from 'react-router-dom';
+import { useAuth } from "../utils/useAuth";
 function Home() {
-    const location = useLocation();
-    console.log(window.localStorage.getItem('state'));
-    
+const {user, logout } =useAuth();
+// const msg = useContext(UserContext)
+console.log(user, "from the home page");
 
   return (
     <div className="Home">
@@ -20,16 +19,17 @@ function Home() {
         <h1 className='title'>
           Welcome to Sophie's Portal
         </h1>
-       
+        {/* <p>{msg}</p> */}
         <p className='description'>
           A place for all things Sophie
         </p>
+      
         <Link className="link" to="/register">Register<span className="sr-only"></span></Link>
         <br/>
         <Link className="link" to="/login">Login<span className="sr-only"></span></Link>
         <br/>
         <Link className="link" to="/about">About<span className="sr-only"></span></Link>
-    
+   
     </main>
     </div>
     </div>

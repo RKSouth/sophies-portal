@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import Axios from 'axios'
 import { Link } from "react-router-dom";
 import {useNavigate} from 'react-router-dom';
+import API from '../utils/api.js'
+
+
 export default function Register() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -39,35 +42,54 @@ export default function Register() {
     }
 
     const addNanny = (e) => {
-        // e.preventDefault();
-        console.log(name,email);
-        Axios.post('http://localhost:3001/create',
-            {
-                name: name,
-                email: email,
-                password: password
-            }
-        ).then((response) => {
-            console.log('you have a new nanny');
-            console.log(response);
+        const nanny = {
+            name: name,
+            email: email,
+            password: password
+        };
+
+
+        console.log(nanny);
+        // Axios.post('http://localhost:3001/create',
+        //     {
+        //         name: name,
+        //         email: email,
+        //         password: password
+        //     }
+        // ).then((response) => {
+        //     console.log('you have a new nanny');
+        //     console.log(response);
+        //     navigateHome();
+        // })
+        API.addNewNanny(nanny).then(res => {
+            console.log("saved", res)
             navigateHome();
-        })
+
+        }).then(err => {
+            console.log("error", err);
+
+        });
+
+
     }
 
     
     const addParent = (e) => {
+        const parent = {
+            name: name,
+            email: email,
+            password: password
+        };
 
-        Axios.post('http://localhost:3001/parent',
-            {
-                name: name,
-                email: email,
-                password: password
-            }
-        ).then((response) => {
-            console.log('you have a new parent');
-            console.log(response);
+
+        API.addNewParent(parent).then(res => {
+            console.log("saved", res)
             navigateHome();
-        })
+
+        }).then(err => {
+            console.log("error", err);
+
+        });
     }
 
 

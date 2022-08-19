@@ -1,30 +1,9 @@
 
-import React,{ useState } from "react";
-import Axios from 'axios'
-import './App.css'
-
-export default function NannyReg(nannyName, n) {
-    const [nannyName, setNannyName] = useState('');
-    const [nannyEmail, setNannyEmail] = useState('');
-    const [nannyPassword, setNannyPassword] = useState('');
+import React from "react";
 
 
-
-
-    const addNanny = (e) => {
-        // e.preventDefault();
-        // console.log(name,email);
-        Axios.post('http://localhost:3001/createNanny',
-            {
-                name: nannyName,
-                email: nannyEmail,
-                password: nannyPassword
-            }
-        ).then((response) => {
-            console.log('you have a new nanny');
-            console.log(response);
-        })
-    }
+export default function NannyReg(props) {
+const nanny = props.nanny
 
     return (
         <div className='card'>
@@ -35,23 +14,23 @@ export default function NannyReg(nannyName, n) {
                 <input
                     type="text"
                     onChange={(e) => {
-                        setNannyName(e.target.value);
+                        props.setNName(e.target.value);
                     }} />
                 <label>email</label>
 
                 <input
                     type="email"
                     onChange={(e) => {
-                        setNannyEmail(e.target.value);
+                        props.setNEmail(e.target.value);
                     }} />
                 <label>Password</label>
 
                 <input
                     type="text"
                     onChange={(e) => {
-                        setNannyPassword(e.target.value);
+                        props.setNPassword(e.target.value);
                     }} />
-                <button onClick={addNanny}>Register</button>
+                <button onClick={props.addNanny}>Register</button>
             </div>
         </div>
     )

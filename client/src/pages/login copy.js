@@ -1,13 +1,11 @@
 
 import React, { useState, useEffect } from "react";
 import Axios from 'axios'
-import { Link as RouterLink } from "react-router-dom";
-import { useAuth } from "../utils/useAuth";
 import { Link } from "react-router-dom";
 import {useNavigate} from 'react-router-dom';
+import API from '../utils/api.js'
 
-
-export default function Login() {
+export default function Login(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -15,8 +13,6 @@ export default function Login() {
     const [isNanny, setIsNanny] = useState(false);
 
     const [loginStatus, setLoginStatus] = useState("");
-
-    const { login } = useAuth();
 
     Axios.defaults.withCredentials = true;
 
@@ -37,17 +33,6 @@ export default function Login() {
         }
        
     }
-
-    
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    login({
-      email: data.get("email"),
-      password: data.get("password")
-    });
-  };
-
 
     const ParentReg = () => {
         if (isParent === false) {
@@ -108,7 +93,7 @@ export default function Login() {
       }, []);
 
     return (
-<div className='App-header' component="form" onSubmit={handleSubmit}>
+<div className='App-header'>
 <h1>{loginStatus}</h1>
         <div className='grid'>
              <h2>Login as a...</h2>
@@ -133,9 +118,6 @@ export default function Login() {
                       <h2>Nanny Login</h2>
                       <input
           type="text"
-          id="email"
-          name="email"
-          autoComplete="email"
           placeholder="Email..."
           onChange={(e) => {
             setEmail(e.target.value);
@@ -143,9 +125,6 @@ export default function Login() {
         />
         <input
           type="password"
-          id="password"
-          name="password"
-          autoComplete="password"
           placeholder="Password..."
           onChange={(e) => {
             setPassword(e.target.value);
