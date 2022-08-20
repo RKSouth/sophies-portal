@@ -7,8 +7,8 @@ import Home from './pages/home';
 import Register from './pages/register';
 import Login from './pages/login';
 import About from './pages/about';
-import { ProfilePage } from "./pages/Profile";
-import { SettingsPage } from "./pages/Settings";
+import { ProfilePage } from "./pages/profile";
+import { SettingsPage } from "./pages/settings";
 import { ProtectedLayout } from "./components/ProtectedLayout";
 //import createRoot from 'react-dom'
 

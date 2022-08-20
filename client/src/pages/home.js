@@ -20,7 +20,8 @@ console.log(user, "from the home page");
           Welcome to Sophie's Portal
         </h1>
         {/* <p>{msg}</p> */}
-        <p className='description'>
+        <p className='description'
+        >
           A place for all things Sophie
         </p>
       
