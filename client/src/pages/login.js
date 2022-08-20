@@ -1,10 +1,9 @@
 
 import React, { useState, useEffect } from "react";
 import Axios from 'axios'
-import { Link as RouterLink } from "react-router-dom";
 import { useAuth } from "../utils/useAuth";
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+
 
 
 export default function Login() {
@@ -19,13 +18,6 @@ export default function Login() {
   const { login } = useAuth();
 
   Axios.defaults.withCredentials = true;
-
-  const navigate = useNavigate();
-
-  const navigateHome = () => {
-    // 👇️ navigate to /
-    navigate('/', { state: { loginStatus } });
-  };
 
   const NannyReg = () => {
 
@@ -60,10 +52,7 @@ export default function Login() {
         setLoginStatus(response.data.message);
       } else {
         setLoginStatus(response.data[0].email);
-       
-        console.log(response.data);
-        console.log(response.data[0].email)
-        console.log(loginStatus);
+  
         login({
           email: response.data[0].email,
           name: response.data[0].name
@@ -90,7 +79,7 @@ export default function Login() {
         console.log(response.data)
 
       }
-      navigateHome();
+  
     });
   };
 
