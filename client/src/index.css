@@ -20,10 +20,21 @@ button {
   background-color:darkcyan;
   border-radius: 12px;
   box-shadow:transparent;
-margin: 8%;
+margin: 3%;
   font-weight: 600;
-  font-size: 22px;
+  /* font-size: 22px; */
   border-color: transparent;
+}
+
+.card {
+  width: 500px;
+}
+.column {
+  flex-direction: column;
+}
+
+.column50 {
+  width:50%
 }
 
 label {
