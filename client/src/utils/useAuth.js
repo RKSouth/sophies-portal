@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
+    // window.localStorage.setItem(keyName, JSON.stringify(newValue));
     navigate("/", { replace: true });
   };
 

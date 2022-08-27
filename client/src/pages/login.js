@@ -55,7 +55,8 @@ export default function Login() {
   
         login({
           email: response.data[0].email,
-          name: response.data[0].name
+          name: response.data[0].name,
+          status: 'nanny'
         });
       }
       // navigateHome();
@@ -77,7 +78,12 @@ export default function Login() {
         setLoginStatus(response.data[0].email);
         window.localStorage.setItem('response', JSON.stringify(response.data));
         console.log(response.data)
-
+        
+        login({
+          email: response.data[0].email,
+          name: response.data[0].name,
+          status: 'parent'
+        });
       }
   
     });
