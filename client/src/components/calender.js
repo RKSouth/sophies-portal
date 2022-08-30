@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Calendar from 'react-calendar';
 
-export default function MyCalender() {
-    const [date, setDate] = useState(new Date());
+export default function MyCalender(props) {
+    const [date, setDate] = useState(props.date);
 
     return (
         <div>

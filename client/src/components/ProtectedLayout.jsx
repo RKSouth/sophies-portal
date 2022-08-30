@@ -4,12 +4,12 @@ import { useAuth } from "../utils/useAuth";
 import 'react-calendar/dist/Calendar.css';
 import MyCalender from "./calender";
 export const ProtectedLayout = () => {
-
+  const [date, setDate] = useState(new Date());
 
   const { user,logout } = useAuth();
   const outlet = useOutlet();
 
-
+console.log(date)
   if (!user) {
     return <Navigate to="/" />;
   } else {
@@ -24,12 +24,20 @@ export const ProtectedLayout = () => {
     </div>
    
    
-   <MyCalender/>
+   <MyCalender
+   date={date}
+   />
    
 
-   <div className="column">
-<div className="column50"></div>
-<div className="column50"></div>
+   <div className="card">
+<div className="column50">
+  <h1>
+    My Schedule
+  </h1>
+  </div>
+<div className="column50">
+  <h1> Add new Shifts</h1>
+</div>
    </div>
     {/* {outlet}  */}
     </div>

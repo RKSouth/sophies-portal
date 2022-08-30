@@ -29,12 +29,12 @@ margin: 3%;
 .card {
   width: 500px;
 }
-.column {
-  flex-direction: column;
-}
+
 
 .column50 {
-  width:50%
+  max-width:200px;
+  margin:5%;
+  float:left
 }
 
 label {
