@@ -1,10 +1,10 @@
-import { Link, Navigate, useOutlet } from "react-router-dom";
+import { Navigate, useOutlet } from "react-router-dom";
 import React, { useState } from 'react'
 import { useAuth } from "../utils/useAuth";
 import 'react-calendar/dist/Calendar.css';
 import MyCalender from "./calender";
 export const ProtectedLayout = () => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate ] = useState(new Date());
 
   const { user,logout } = useAuth();
   const outlet = useOutlet();
@@ -43,16 +43,16 @@ console.log(date)
     </div>
   }
 
-  return (
-    <div>
-        <h1></h1>
-      {/* <AppBar
-        pages={[
-          { label: "Settings", path: "settings" },
-          { label: "Profile", path: "profile" }
-        ]}
-      />
-      {outlet} */}
-    </div>
-  );
+  // return (
+  //   <div>
+  //       <h1></h1>
+  //     {/* <AppBar
+  //       pages={[
+  //         { label: "Settings", path: "settings" },
+  //         { label: "Profile", path: "profile" }
+  //       ]}
+  //     />
+  //     {outlet} */}
+  //   </div>
+  // );
 };
