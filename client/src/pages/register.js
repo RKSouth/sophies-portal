@@ -1,6 +1,5 @@
 
 import React, { useState } from "react";
-import Axios from 'axios'
 import { Link } from "react-router-dom";
 import {useNavigate} from 'react-router-dom';
 import API from '../utils/api.js'
@@ -22,14 +21,12 @@ export default function Register() {
       };
 
     const NannyReg = () => {
-
         if (isNanny === false) {
             setIsNanny(true);
             setIsParent(false);
         } else {
             setIsNanny(false);
-        }
-       
+        }  
     }
 
     const ParentReg = () => {
@@ -47,30 +44,13 @@ export default function Register() {
             email: email,
             password: password
         };
-
-
         console.log(nanny);
-        // Axios.post('http://localhost:3001/create',
-        //     {
-        //         name: name,
-        //         email: email,
-        //         password: password
-        //     }
-        // ).then((response) => {
-        //     console.log('you have a new nanny');
-        //     console.log(response);
-        //     navigateHome();
-        // })
         API.addNewNanny(nanny).then(res => {
             console.log("saved", res)
             navigateHome();
-
         }).then(err => {
             console.log("error", err);
-
         });
-
-
     }
 
     
@@ -80,8 +60,6 @@ export default function Register() {
             email: email,
             password: password
         };
-
-
         API.addNewParent(parent).then(res => {
             console.log("saved", res)
             navigateHome();

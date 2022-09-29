@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {useLocation, useNavigate} from 'react-router-dom';
 import { useAuth } from "../utils/useAuth";
 function Home() {
-const {user, logout } =useAuth();
+const {user, logout } = useAuth();
 // const msg = useContext(UserContext)
 console.log(user, "from the home page");
 
