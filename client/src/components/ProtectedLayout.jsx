@@ -67,9 +67,9 @@ function showHide(event) {
       )}
 
       {notes && (
-      <div className="card">
+
         <Notes/>
-      </div>
+
       )}
         {profile && (
 
