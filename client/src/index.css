@@ -21,26 +21,40 @@ button {
   background-color:darkcyan;
   border-radius: 12px;
   box-shadow:transparent;
-margin: 3%;
+  margin: 3%;
   font-weight: 600;
   /* font-size: 22px; */
   border-color: transparent;
+width: 20%;
 }
 
 .card {
-  width: 500px;
+  min-width: 60vw;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  margin: center;
 }
+.col45 {
+flex: 1;
+width: 45%;
 
+}
 
 .column50 {
   max-width:200px;
   margin:5%;
-  float:left;
-  flex-flow: row;
+ width: 50%;
 
 }
 
 label {
   margin: 2%;
+}
+
+th ,td {
+  border: 2px;
+  border-style: dotted;
+  border-color: rgba(174, 174, 174, 0.624);
 }
 

@@ -20,28 +20,23 @@ export const ProtectedLayout = () => {
 function showHide(event) {
 
  if (event.target.innerText === 'schedule'){
-  setSchedule(true)
-  setProfile(false)
-  setNotes(false)
-  setCalender(true)
+  setSchedule(true);
+  setProfile(false);
+  setNotes(false);
+  setCalender(true);
  } 
  if (event.target.innerText ==='notes'){
   setSchedule(false);
   setProfile(false);
   setNotes(true);
-  setCalender(false)
-
+  setCalender(false);
  }
 
  if (event.target.innerText ==='profile'){
-  setSchedule(false)
-  setProfile(true)
+  setSchedule(false);
+  setProfile(true);
   setNotes(false);
-  setCalender(false)
-
-MyCalender.style = 'marginLeft:100%'
-  // MyCalender.style.display ='none'
-  console.log(MyCalender.style)
+  setCalender(false);
  }
 }
 
@@ -66,9 +61,9 @@ MyCalender.style = 'marginLeft:100%'
       )}
 
 {schedule && (
-      <div className="card">
+     
         <Schedule/>
-      </div>
+    
       )}
 
       {notes && (
@@ -77,9 +72,9 @@ MyCalender.style = 'marginLeft:100%'
       </div>
       )}
         {profile && (
-      <div className="card">
+
         <Profile/>
-      </div>
+
       )}
       {/* {outlet}  */}
     </div>
