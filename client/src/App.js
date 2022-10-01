@@ -5,7 +5,7 @@ import Home from './pages/home';
 import Register from './pages/register';
 import Login from './pages/login';
 import About from './pages/about';
-import { ProfilePage } from "./pages/profile";
+import { dashboardPage } from "./pages/dashboard";
 import { SettingsPage } from "./pages/settings";
 import { ProtectedLayout } from "./components/ProtectedLayout";
 
@@ -31,8 +31,8 @@ function App() {
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
             <Route path="about" element={<About />} />
-            <Route path="/dashboard" element={<ProtectedLayout />}>
-               <Route path="profile" element={<ProfilePage />} />
+            <Route path="/user" element={<ProtectedLayout />}>
+               <Route path="dashboard" element={<dashboardPage />} />
                <Route path="settings" element={<SettingsPage />} />
              </Route>
           </Routes>
