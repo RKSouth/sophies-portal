@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: whitesmoke;
 }
 
 code {
@@ -34,9 +35,17 @@ margin: 3%;
 .column50 {
   max-width:200px;
   margin:5%;
-  float:left
+  float:left;
+  flex-flow: row;
+  /* margin-left: 18%; */
 }
 
 label {
   margin: 2%;
+}
+
+.calender-container {
+  width: 250px;
+  color:blueviolet;
+  background-color: chocolate;
 }
