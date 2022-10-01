@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (data) => {
     setUser(data);
-    navigate("/dashboard/profile", { replace: true });
+    navigate("/user/dashboard", { replace: true });
   };
 
   const logout = () => {
