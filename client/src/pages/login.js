@@ -59,10 +59,6 @@ export default function Login() {
         setLoginStatus(response.data.message);
       } else {
         setLoginStatus(response.data[0].email);
-       
-        console.log(response.data);
-        console.log(response.data[0].email)
-        console.log(loginStatus);
         login({
           email: response.data[0].email,
           name: response.data[0].name

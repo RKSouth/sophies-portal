@@ -6,6 +6,7 @@ import MyCalender from "./calender";
 import Notes from './notes'
 import Profile from './profile'
 import Schedule from './schedule'
+import { useEffect } from "react";
 
 export const ProtectedLayout = () => {
   const [date, setDate] = useState(new Date());
@@ -14,26 +15,33 @@ export const ProtectedLayout = () => {
   const [notes, setNotes] = useState(false);
   const [schedule, setSchedule] = useState(false);
   const [profile, setProfile] = useState(false);
-
+  const [calender, setCalender] = useState(true)
 
 function showHide(event) {
-  console.log(event.target.innerText)
+
  if (event.target.innerText === 'schedule'){
   setSchedule(true)
   setProfile(false)
   setNotes(false)
-  console.log('wtf')
+  setCalender(true)
  } 
  if (event.target.innerText ==='notes'){
-  setSchedule(false)
-  setProfile(false)
-  setNotes(true)
+  setSchedule(false);
+  setProfile(false);
+  setNotes(true);
+  setCalender(false)
+
  }
 
  if (event.target.innerText ==='profile'){
   setSchedule(false)
   setProfile(true)
-  setNotes(false)
+  setNotes(false);
+  setCalender(false)
+
+MyCalender.style = 'marginLeft:100%'
+  // MyCalender.style.display ='none'
+  console.log(MyCalender.style)
  }
 }
 
@@ -51,27 +59,27 @@ function showHide(event) {
         <button value='notes' onClick={showHide}><h2>notes</h2></button>
         <button value='profile' onClick={showHide}><h2>profile</h2></button>
       </div>
-
+      {calender && (
       <MyCalender
         date={date}
       />
+      )}
 
 {schedule && (
       <div className="card">
         <Schedule/>
-      </div>)}
+      </div>
+      )}
 
       {notes && (
       <div className="card">
         <Notes/>
       </div>
-
       )}
         {profile && (
       <div className="card">
         <Profile/>
       </div>
-
       )}
       {/* {outlet}  */}
     </div>
