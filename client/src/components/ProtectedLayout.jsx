@@ -48,7 +48,7 @@ function showHide(event) {
     return <div>
       <h2>hello! {user.name}</h2>
       <h3> Would you like to...</h3>
-      <div className="card">
+      <div className="card" style={{display:'block'}}>
         <button key={"logout"} onClick={logout}><h2>logout</h2></button>
         <button value='schedule' onClick={showHide}><h2>schedule</h2></button>
         <button value='notes' onClick={showHide}><h2>notes</h2></button>

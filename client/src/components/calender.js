@@ -6,8 +6,8 @@ export default function MyCalender(props) {
 
     return (
         <div>
-        <div className='calendar-container' style={{marginLeft:'17%'}}>
-        <Calendar onChange={setDate} value={date} selectRange={true} style={{color: 'black'}} />
+        <div className='calendar-container' style={{marginLeft:'20vw', marginRight:"20vw"}}>
+        <Calendar  className= "calender" onChange={setDate} value={date} selectRange={true} />
       </div>
       {date.length > 0 ? (
    <p>

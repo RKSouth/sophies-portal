@@ -8,12 +8,12 @@ function Profile() {
         <div>
         <div className="card" style={{flexDirection:'row', display:'flex'}}>
 
-            <p  className="col45">Name:</p>
-            <input  className="col45"placeholder={user.name}></input>
+            <p  className="colTitle">Name:</p>
+            <input  className="colInput"placeholder={user.name}></input>
 </div>
             <div className="card" style={{flexDirection:'row', display:'flex'}}>
-            <p  className="col45">Email:</p>
-            <input   className="col45" placeholder={user.email}></input>
+            <p  className="colTitle">Email:</p>
+            <input   className="colInput" placeholder={user.email}></input>
             </div>
         </div>
    
